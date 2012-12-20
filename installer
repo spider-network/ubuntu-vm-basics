@@ -1,4 +1,10 @@
 #!/usr/bin/env bash
-sudo apt-get install -y make
 
-echo "hello world"
+INSTALL_VERSION="0.9.1"
+INSTALL_PATH=$HOME/"kunden"
+
+sudo apt-get install -y make
+cd /tmp && curl -L -O https://github.com/spider-network/ubuntu-vm-basics/archive/$INSTALL_VERSION.tar.gz
+mkdir -p $INSTALL_PATH
+cd /tmp && tar -xvf $INSTALL_VERSION.tar.gz -C $INSTALL_PATH && rm /tmp/$INSTALL_VERSION.tar.gz
+cd $INSTALL_PATH/ubuntu-vm-basics-$INSTALL_VERSION && make

@@ -4,9 +4,14 @@ SERVER_CONFIG_INSTALL_DIR = $(SERVER_CONFIG_DIR)
 SERVER_CONFIG_VENDOR_DIR = $(SERVER_CONFIG_INSTALL_DIR)/vendor
 
 # Programm versions
-BUNDLER_VERSION = 1.2.3 		# http://rubygems.org/gems/bundler
-GIT_VERSION = 1.8.0.2 			# http://code.google.com/p/git-core/downloads/list
-RUBY_VERSION = 1.9.3-p327		# http://www.ruby-lang.org/de/downloads/
+BUNDLER_VERSION = 1.2.3
+# http://rubygems.org/gems/bundler
+
+GIT_VERSION = 1.8.0.2
+# http://code.google.com/p/git-core/downloads/list
+
+RUBY_VERSION = 1.9.3-p327
+# http://www.ruby-lang.org/de/downloads/
 
 install:
 	make install_main_packages
