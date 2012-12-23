@@ -60,3 +60,4 @@ PLATFORMS
 
 DEPENDENCIES
   chef
+  moneta (~> 0.6.0)
