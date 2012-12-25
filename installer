@@ -1,10 +1,66 @@
 #!/usr/bin/env bash
 
-INSTALL_VERSION="0.9.1"
-INSTALL_PATH=$HOME/"kunden"
+# Folders
+SCRIPT=$(readlink -f "$0")
+SERVER_CONFIG_DIR=`dirname "$SCRIPT"`
+SERVER_CONFIG_INSTALL_DIR=$SERVER_CONFIG_DIR
+SERVER_CONFIG_VENDOR_DIR=$SERVER_CONFIG_INSTALL_DIR/vendor
 
-sudo apt-get install -y make
-cd /tmp && curl -L -O https://github.com/spider-network/ubuntu-vm-basics/archive/$INSTALL_VERSION.tar.gz
-mkdir -p $INSTALL_PATH
-cd /tmp && tar -xvf $INSTALL_VERSION.tar.gz -C $INSTALL_PATH && rm /tmp/$INSTALL_VERSION.tar.gz
-cd $INSTALL_PATH/ubuntu-vm-basics-$INSTALL_VERSION && make
+# Programm versions
+BUNDLER_VERSION=1.2.3                   # http://rubygems.org/gems/bundler
+GIT_VERSION=1.8.0.2                     # http://code.google.com/p/git-core/downloads/list
+
+RUBY_VERSION=1.9.3-p327                 # http://www.ruby-lang.org/de/downloads/
+RVM_RUBY_VERSION_DEFAULT=1.9.3-p327
+RVM_RUBY_VERSION_1=1.9.3-p194
+
+RVM_VERSION=1.17.4                      # https://rvm.io
+                                        # curl -L https://github.com/wayneeseguin/rvm/archive/1.17.4.tar.gz  -o rvm-1.17.4.tar.gz
+
+RUBYGEMS_VERSION=1.8.24                 # https://github.com/rubygems/rubygems/tags
+
+YAML_VERSION=0.1.4
+
+# Install main packages
+sudo apt-get update
+sudo DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" upgrade
+sudo DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" dist-upgrade
+sudo apt-get -y install build-essential zlib1g-dev libssl-dev openssl libreadline6 libreadline6-dev libyaml-dev curl libcurl4-openssl-dev libexpat1-dev gettext htop automake make  wget screen
+
+# Install GIT
+cp $SERVER_CONFIG_VENDOR_DIR/git-$GIT_VERSION.tar.gz /tmp
+cd /tmp && tar -xvf git-$GIT_VERSION.tar.gz
+cd /tmp/git-$GIT_VERSION && make prefix=/usr/local all && sudo make prefix=/usr/local install
+rm -rf /tmp/git-$GIT_VERSION
+
+# Install Ruby
+cp $SERVER_CONFIG_VENDOR_DIR/ruby-$RUBY_VERSION.tar.bz2 /tmp
+cd /tmp && tar -xvf ruby-$RUBY_VERSION.tar.bz2
+cd /tmp/ruby-$RUBY_VERSION && ./configure && make && sudo make install
+rm -rf $SERVER_CONFIG_VENDOR_DIR/ruby-$RUBY_VERSION
+
+# Function to install chef
+cd $SERVER_CONFIG_VENDOR_DIR && sudo gem install bundler-$BUNDLER_VERSION.gem --local --no-rdoc --no-ri
+cd $SERVER_CONFIG_INSTALL_DIR && bundle install --local
+
+# Install RVM
+cp $SERVER_CONFIG_VENDOR_DIR/rvm-$RVM_VERSION.tar.gz /tmp
+cd /tmp && tar -xvf rvm-$RVM_VERSION.tar.gz
+cd /tmp/rvm-$RVM_VERSION && ./install --auto && ~/.rvm/bin/rvm reload
+source ~/.rvm/scripts/rvm
+
+# Install RVM rubies
+cp $SERVER_CONFIG_VENDOR_DIR/ruby-$RVM_RUBY_VERSION_DEFAULT.tar.bz2 $rvm_path/archives/
+cp $SERVER_CONFIG_VENDOR_DIR/ruby-$RVM_RUBY_VERSION_1.tar.bz2 $rvm_path/archives/
+cp $SERVER_CONFIG_VENDOR_DIR/rubygems-$RUBYGEMS_VERSION.tgz $rvm_path/archives/
+cp $SERVER_CONFIG_VENDOR_DIR/yaml-$YAML_VERSION.tar.gz $rvm_path/archives/
+rm -rf $rvm_path/user/db && echo rubygems_version=$RUBYGEMS_VERSION >> $rvm_path/user/db
+echo "" > ~/.rvm/gemsets/default.gems
+echo "" > ~/.rvm/gemsets/global.gems
+rm -rf ~/.rvm/src/ruby-$RVM_RUBY_VERSION_DEFAULT && ~/.rvm/bin/rvm install ruby-$RVM_RUBY_VERSION_DEFAULT --default --disable-binary --force
+rm -rf ~/.rvm/src/ruby-$RVM_RUBY_VERSION_1 && ~/.rvm/bin/rvm install ruby-$RVM_RUBY_VERSION_1 --disable-binary --force
+source ~/.rvm/scripts/rvm
+
+# Function to install chef
+cd $SERVER_CONFIG_VENDOR_DIR && sudo gem install bundler-$BUNDLER_VERSION.gem --local --no-rdoc --no-ri
+cd $SERVER_CONFIG_INSTALL_DIR && bundle install --local

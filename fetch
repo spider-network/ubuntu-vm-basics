@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+INSTALL_VERSION="0.9.2"
+INSTALL_PATH=$HOME
+
+mkdir -p $INSTALL_PATH
+cd /tmp && curl -L -O https://github.com/spider-network/ubuntu-vm-basics/archive/$INSTALL_VERSION.tar.gz
+cd /tmp && tar -xvf $INSTALL_VERSION.tar.gz
+rm /tmp/$INSTALL_VERSION.tar.gz
+cp -r /tmp/ubuntu-vm-basics-$INSTALL_VERSION $INSTALL_PATH
+
+echo "Go to 'cd $INSTALL_PATH/ubuntu-vm-basics-$INSTALL_VERSION' and start the installtion script './installer'"
