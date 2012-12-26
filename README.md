@@ -18,13 +18,13 @@ Install git, ruby and chef inside a fresh and blank Ubuntu VM/Server.
 ### How to use it!
 Requirements [VirtualBox](https://www.virtualbox.org/) and [Ruby](http://www.ruby-lang.org/en/) with RubyGems have installed on your system.
 
-##### Install the vagrant gem
+#### Install the vagrant gem
     $> gem install vagrant
     $> mkdir -p ~/vms/vagrant/boxes
     $> cd ~/vms/vagrant/boxes && wget http://files.vagrantup.com/precise64.box
     $> cd ~/vms/vagrant && vagrant box add ubuntu_precise64 boxes/precise64.box
     
-##### Init new project
+#### Init new project
     $> mkdir -p ~/vms/vagrant/vm-001
     $> cd ~/vms/vagrant/vm-001
     $> vagrant init ubuntu_precise64
@@ -36,7 +36,12 @@ Requirements [VirtualBox](https://www.virtualbox.org/) and [Ruby](http://www.rub
 
 **Now you can setup the vm/server with your own chef recipes.**
 
-##### Vagrant doc links
+#### Teardown
+    $> vagrant suspend
+    $> vagrant halt
+    $> vagrant destroy
+
+#### Vagrant doc links
 * [Getting Started](http://vagrantup.com/v1/docs/getting-started/index.html)
   * [teardown](http://vagrantup.com/v1/docs/getting-started/teardown.html)
 
