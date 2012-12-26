@@ -5,6 +5,8 @@ Install git, ruby and chef inside a fresh and blank Ubuntu VM/Server.
     sudo apt-get update && sudo apt-get install -y curl
     curl -L https://raw.github.com/spider-network/ubuntu-vm-basics/master/fetch |bash
     # follow the instructions
+    
+**Step by step instruction:** [How to use it!](#how-to-use-it)
 
 * Git 1.8.0.2
 * Ruby 1.9.3-p327 (System)
