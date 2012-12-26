@@ -41,6 +41,9 @@ Requirements [VirtualBox](https://www.virtualbox.org/) and [Ruby](http://www.rub
     $> vagrant halt
     $> vagrant destroy
 
+**With `vagrant up` and `vagrant ssh` you have a brand fresh VM.**
+
+
 #### Vagrant doc links
 * [Getting Started](http://vagrantup.com/v1/docs/getting-started/index.html)
   * [teardown](http://vagrantup.com/v1/docs/getting-started/teardown.html)
