@@ -7,10 +7,12 @@ Install git, ruby and chef inside a fresh and blank Ubuntu VM/Server.
     # follow the instructions
 
 * Git 1.8.0.2
-* Ruby 1.9.3-p327
+* Ruby 1.9.3-p327 (System)
 * Bundler 1.2.3
 * Chef 10.16.2
 * RVM 1.17.4
+  * Ruby 1.9.3-p327 (Default)
+  * Ruby 1.9.3-p194
 
 
 ### Howto test it locally.
