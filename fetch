@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-INSTALL_VERSION="0.9.5"
+INSTALL_VERSION="0.9.6"
 INSTALL_PATH=$HOME
 
 mkdir -p $INSTALL_PATH
@@ -15,4 +15,4 @@ cd $INSTALL_PATH && ln -sf ubuntu-vm-basics-$INSTALL_VERSION ubuntu-vm-basics
 rm /tmp/$INSTALL_VERSION.tar.gz && rm -rf /tmp/ubuntu-vm-basics-*
 
 echo ""
-echo -e "Go to '\033[01;33mcd $INSTALL_PATH/ubuntu-vm-basics\033[00;00m' and execute the install script '\033[01;33m./installer\033[00;00m'"
+echo -e "Go to '\033[32mcd $INSTALL_PATH/ubuntu-vm-basics\033[00m' and execute the install script '\033[32m./installer\033[00m'"

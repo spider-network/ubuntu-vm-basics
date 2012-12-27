@@ -19,6 +19,8 @@ RVM_VERSION=1.17.6                      # https://rvm.io
 
 RUBYGEMS_VERSION=1.8.24                 # https://github.com/rubygems/rubygems/tags
 
+BUNDLER_VERSION=1.2.3                   # http://rubygems.org/gems/bundler
+
 YAML_VERSION=0.1.4
 
 # Install main packages
@@ -39,7 +41,7 @@ cd /tmp && tar -xvf ruby-$RUBY_VERSION.tar.bz2
 cd /tmp/ruby-$RUBY_VERSION && ./configure && make && sudo make install
 rm -rf $SERVER_CONFIG_VENDOR_DIR/ruby-$RUBY_VERSION
 
-# Function to install chef
+# Install chef
 cd $SERVER_CONFIG_VENDOR_DIR && sudo gem install bundler-$BUNDLER_VERSION.gem --local --no-rdoc --no-ri
 cd $SERVER_CONFIG_INSTALL_DIR && bundle install --local
 
@@ -57,10 +59,15 @@ cp $SERVER_CONFIG_VENDOR_DIR/yaml-$YAML_VERSION.tar.gz $rvm_path/archives/
 rm -rf $rvm_path/user/db && echo rubygems_version=$RUBYGEMS_VERSION >> $rvm_path/user/db
 echo "" > ~/.rvm/gemsets/default.gems
 echo "" > ~/.rvm/gemsets/global.gems
-rm -rf ~/.rvm/src/ruby-$RVM_RUBY_VERSION_DEFAULT && ~/.rvm/bin/rvm install ruby-$RVM_RUBY_VERSION_DEFAULT --disable-binary --force
-rm -rf ~/.rvm/src/ruby-$RVM_RUBY_VERSION_1 && ~/.rvm/bin/rvm install ruby-$RVM_RUBY_VERSION_1 --disable-binary --force
-rm -rf ~/.rvm/src/ruby-$RVM_RUBY_VERSION_2 && ~/.rvm/bin/rvm install ruby-$RVM_RUBY_VERSION_2 --disable-binary --force
+
+bash --login -c "$rvm_path/bin/rvm install ruby-$RVM_RUBY_VERSION_DEFAULT --disable-binary --force"
+bash --login -c "rvm use ruby-$RVM_RUBY_VERSION_DEFAULT --default && cd $SERVER_CONFIG_VENDOR_DIR && gem install bundler-$BUNDLER_VERSION.gem --local --no-rdoc --no-ri && cd $SERVER_CONFIG_INSTALL_DIR && bundle install --local"
+
+bash --login -c "$rvm_path/bin/rvm install ruby-$RVM_RUBY_VERSION_1 --disable-binary --force"
+bash --login -c "rvm use ruby-$RVM_RUBY_VERSION_1 && cd $SERVER_CONFIG_VENDOR_DIR && gem install bundler-$BUNDLER_VERSION.gem --local --no-rdoc --no-ri && cd $SERVER_CONFIG_INSTALL_DIR && bundle install --local"
+
+bash --login -c "$rvm_path/bin/rvm install ruby-$RVM_RUBY_VERSION_2 --disable-binary --force"
+bash --login -c "rvm use ruby-$RVM_RUBY_VERSION_2 && cd $SERVER_CONFIG_VENDOR_DIR && gem install bundler-$BUNDLER_VERSION.gem --local --no-rdoc --no-ri && cd $SERVER_CONFIG_INSTALL_DIR && bundle install --local"
 
 echo ""
-echo -e "Source RVM '\033[01;33msource ~/.rvm/scripts/rvm\033[00;00m'"
-echo -e "Select a ruby version with '\033[01;33mrvm use ruby-1.9.3-p[362|327|194] --default\033[00;00m' and install chef '\033[01;33m./install-chef\033[00;00m'"
+echo -e "\033[32mDone! \033[31mLogout and login again to reload the current shell (ctrl+d), then you can run your own chef recipes\033[00m"
