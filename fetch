@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-INSTALL_VERSION="0.9.4"
+INSTALL_VERSION="0.9.5"
 INSTALL_PATH=$HOME
 
 mkdir -p $INSTALL_PATH
