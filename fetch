@@ -1,12 +1,18 @@
 #!/usr/bin/env bash
 
-INSTALL_VERSION="0.9.3"
+INSTALL_VERSION="0.9.4"
 INSTALL_PATH=$HOME
 
 mkdir -p $INSTALL_PATH
 cd /tmp && curl -L -O https://github.com/spider-network/ubuntu-vm-basics/archive/$INSTALL_VERSION.tar.gz
 cd /tmp && tar -xvf $INSTALL_VERSION.tar.gz
-rm /tmp/$INSTALL_VERSION.tar.gz
-cp -r /tmp/ubuntu-vm-basics-$INSTALL_VERSION $INSTALL_PATH
 
-echo "Go to '\033[01;33mcd $INSTALL_PATH/ubuntu-vm-basics-$INSTALL_VERSION\033[00;00m' and execute the install script '\033[01;33m./installer\033[00;00m'"
+rm -rf $INSTALL_PATH/ubuntu-vm-basics*
+
+cp -r /tmp/ubuntu-vm-basics-$INSTALL_VERSION $INSTALL_PATH
+cd $INSTALL_PATH && ln -sf ubuntu-vm-basics-$INSTALL_VERSION ubuntu-vm-basics
+
+rm /tmp/$INSTALL_VERSION.tar.gz && rm -rf /tmp/ubuntu-vm-basics-*
+
+echo ""
+echo -e "Go to '\033[01;33mcd $INSTALL_PATH/ubuntu-vm-basics\033[00;00m' and execute the install script '\033[01;33m./installer\033[00;00m'"

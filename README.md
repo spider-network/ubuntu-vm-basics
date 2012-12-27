@@ -4,7 +4,9 @@ Install git, ruby and chef inside a fresh and blank Ubuntu VM/Server.
 
     sudo apt-get update && sudo apt-get install -y curl
     curl -L https://raw.github.com/spider-network/ubuntu-vm-basics/master/fetch |bash
-    # follow the instructions
+    cd ~/ubuntu-vm-basics && ./installer
+    rvm use ruby-1.9.3-p362
+    ./install-chef
 
 **Step by step instruction:** [How to use it!](#how-to-use-it)
 
@@ -35,7 +37,9 @@ Requirements [VirtualBox](https://www.virtualbox.org/) and [Ruby](http://www.rub
     $> vagrant ssh
     vagrant@precise64:~$ sudo apt-get update && sudo apt-get install -y curl
     vagrant@precise64:~$ curl -L https://raw.github.com/spider-network/ubuntu-vm-basics/master/fetch |bash
-    # follow the instructions
+    vagrant@precise64:~$ cd ~/ubuntu-vm-basics && ./installer
+    vagrant@precise64:~$ rvm use ruby-1.9.3-p362
+    vagrant@precise64:~$ ./install-chef
 
 **Now you can setup the vm/server with your own chef recipes.**
 
