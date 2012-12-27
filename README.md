@@ -5,15 +5,16 @@ Install git, ruby and chef inside a fresh and blank Ubuntu VM/Server.
     sudo apt-get update && sudo apt-get install -y curl
     curl -L https://raw.github.com/spider-network/ubuntu-vm-basics/master/fetch |bash
     # follow the instructions
-    
+
 **Step by step instruction:** [How to use it!](#how-to-use-it)
 
 * Git 1.8.0.2
-* Ruby 1.9.3-p327 (System)
+* Ruby 1.9.3-p362 (System)
 * Bundler 1.2.3
 * Chef 10.16.2
 * RVM 1.17.4
-  * Ruby 1.9.3-p327 (Default)
+  * Ruby 1.9.3-p362
+  * Ruby 1.9.3-p327
   * Ruby 1.9.3-p194
 
 
@@ -25,7 +26,7 @@ Requirements [VirtualBox](https://www.virtualbox.org/) and [Ruby](http://www.rub
     $> mkdir -p ~/vms/vagrant/boxes
     $> cd ~/vms/vagrant/boxes && wget http://files.vagrantup.com/precise64.box
     $> cd ~/vms/vagrant && vagrant box add ubuntu_precise64 boxes/precise64.box
-    
+
 #### Init new project
     $> mkdir -p ~/vms/vagrant/vm-001
     $> cd ~/vms/vagrant/vm-001
