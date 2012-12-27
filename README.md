@@ -39,6 +39,10 @@ Requirements [VirtualBox](https://www.virtualbox.org/) and [Ruby](http://www.rub
 
 **Now you can setup the vm/server with your own chef recipes.**
 
+#### Save VM status
+    $> mkdir .vagrantboxes
+    $> vagrant package --output .vagrantboxes/vm_package_001_name.box
+    
 #### Teardown
     $> vagrant suspend
     $> vagrant halt
