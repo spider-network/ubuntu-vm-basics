@@ -39,6 +39,24 @@ Requirements [VirtualBox](https://www.virtualbox.org/) and [Ruby](http://www.rub
 
 **Now you can setup the vm/server with your own chef recipes.**
 
+#### Save VM status
+    $> mkdir .vagrantboxes
+    $> vagrant package --output .vagrantboxes/vm_package_001_name.box
+    
+
+**Troubleshooting**
+
+    The following SSH command responded with a non-zero exit status.
+    Vagrant assumes that this means the command failed!
+
+    mount -t vboxsf -o uid=`id -u vagrant`,gid=`id -g vagrant` v-root /vagrant
+
+See: http://vagrantup.com/v1/docs/troubleshooting.html
+
+    lsmod | grep vboxsf
+    sudo /etc/init.d/vboxadd setup
+
+    
 #### Teardown
     $> vagrant suspend
     $> vagrant halt
